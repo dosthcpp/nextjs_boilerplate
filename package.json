@@ -2,14 +2,26 @@
   "name": "learn-starter",
   "version": "0.1.0",
   "private": true,
+  "watch": {
+    "style": "public/style.css"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    // please run yarn watch && cs
+    "watch": "npm-watch style",
+    "cs": "node-sass -w scss/main.scss public/style.css"
   },
   "dependencies": {
     "next": "^11.0.0",
+    "next-redux-wrapper": "^7.0.2",
+    "normalize.css": "^8.0.1",
+    "npm-watch": "^0.11.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-redux": "^7.2.4",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-logger": "^3.0.6"
   }
 }

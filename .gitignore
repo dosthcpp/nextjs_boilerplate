@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+# home
+/home/.next/
+/home/node_modules
+
 # testing
 /coverage
 
