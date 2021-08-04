@@ -1,0 +1,40 @@
+.header {
+  padding: 20px 150px 20px 150px;
+  display: flex;
+  flex-direction: row;
+  &__title {
+    color: white;
+    font-size: large;
+    cursor: pointer;
+
+    &-section {
+      flex: 0 1 50%;
+    }
+  }
+
+  &__menu {
+    &-section {
+      display: flex;
+      flex: 0 1 50%;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    &_item {
+      @for $i from 1 through 4 {
+        &-#{$i} {
+          -moz-transition: all 0.2s ease-in;
+          -o-transition: all 0.2s ease-in;
+          -webkit-transition: all 0.2s ease-in;
+          transition: all 0.2s ease-in;
+          color: #cecece;
+
+          &:hover {
+            color: white;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

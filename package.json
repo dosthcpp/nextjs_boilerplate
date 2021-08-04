@@ -3,14 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "watch": {
-    "style": "public/style.css"
+    "dev": "public/style.css"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    // please run yarn watch && cs
-    "watch": "npm-watch style",
+    "watch": "npm-watch dev",
     "cs": "node-sass -w scss/main.scss public/style.css"
   },
   "dependencies": {
@@ -22,6 +21,7 @@
     "react-dom": "17.0.2",
     "react-redux": "^7.2.4",
     "redux-devtools-extension": "^2.13.9",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "styled-components": "^5.3.0"
   }
 }
