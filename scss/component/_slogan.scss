@@ -1,0 +1,21 @@
+.slogan {
+  font-size: 6vw;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  width: 60%;
+
+  &__sub {
+    font-size: 2vw;
+    color: #cecece;
+    text-align: center;
+    width: 60%;
+  }
+
+  &__p {
+    font-size: 2vw;
+    color: #999999;
+    text-align: center;
+    width: 60%;
+  }
+}

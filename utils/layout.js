@@ -14,12 +14,6 @@ export const MessageBubbleContainer = styled.div`
   margin-bottom: 5px;
 `;
 
-export const MessageBubbleColumn = styled.div`
-  display: "flex";
-  flex-direction: "column";
-  height: 300px;
-`;
-
 export const RowNormal = styled.div`
   display: flex;
   flex-direction: row;
@@ -39,19 +33,20 @@ export const RowRight = styled.div`
 `;
 
 export const Column = styled.div`
-  display: "flex";
-  flex-direction: "column";
+  display: flex;
+  flex-direction: column;
 `;
 
 export const ColumnCentered = styled.div`
-  display: "flex";
-  flex-direction: "column";
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 `;
 
 export const ColumnWithWidth = styled.div`
-  display: "flex";
-  flex-direction: "column";
+  display: flex;
+  flex-direction: column;
   width: 300px;
   align-items: center;
   justify-content: center;
@@ -60,10 +55,4 @@ export const ColumnWithWidth = styled.div`
 export const SizedBox = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
-`;
-
-export const SizedBoxWithElevation = styled.div`
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.8);
 `;
