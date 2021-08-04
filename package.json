@@ -9,7 +9,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    // please run yarn watch && cs
     "watch": "npm-watch style",
     "cs": "node-sass -w scss/main.scss public/style.css"
   },
