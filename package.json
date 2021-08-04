@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "watch": {
-    "style": "public/style.css"
+    "dev": "public/style.css"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "watch": "npm-watch style",
+    "watch": "npm-watch dev",
     "cs": "node-sass -w scss/main.scss public/style.css"
   },
   "dependencies": {
