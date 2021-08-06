@@ -8,10 +8,20 @@ import { countPlusAction } from "../reducers/count";
 import { ColumnCentered, SizedBox } from "../utils/layout";
 import user from "../public/static/image/user.png";
 import "../public/style.css";
-import { useState } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 
 function Home() {
+  const boxRef = useRef(null);
+  const dotRef = useRef(null);
+  const [dotPos, setDotPos] = useState(-310);
+  const [reviewRefs, setReviewRefs] = useState([
+    createRef(),
+    createRef(),
+    createRef(),
+  ]);
   const [reviewIdx, setReviewIdx] = useState(0);
+  const [moveLeft, setMoveLeft] = useState(false);
+  const [moveRight, setMoveRight] = useState(false);
   const reviewContent = [
     "Dingo는 정말 놀라운 제품이에요. 제 모든 자료들을 한번에 살펴볼 수 있고, 복잡하게 탭을 왔다갔다 할 필요 없이 업무에 집중할 수 있어서 좋아요.",
     "Dingo가 지난 몇달 간 이뤄온 성과는 상상을 초월합니다. 이 제품이 굉장한 파급력을 가져올 것이라 믿어 의심치 않아요.",
@@ -23,7 +33,12 @@ function Home() {
   );
 
   const review = (idx) => (
-    <div>
+    <div
+      className={`review-${idx} ${
+        moveLeft ? "move-left" : moveRight ? "move-right" : ""
+      }`}
+      ref={reviewRefs[idx]}
+    >
       <div className="review-quotationmark">
         <span>"</span>
         <span>"</span>
@@ -46,16 +61,9 @@ function Home() {
     </div>
   );
 
-  const renderReview = (idx) => {
-    switch (idx) {
-      case 0:
-      case 1:
-      case 2:
-        return review(idx);
-      default:
-        break;
-    }
-  };
+  useEffect(() => {
+    dotRef.current.style.transform = `translate(${dotPos}%, -50%)`;
+  }, [dotPos]);
 
   return (
     <>
@@ -234,32 +242,14 @@ function Home() {
               <span className="review-title_">_</span>
             </div>
             <SizedBox height="100px" />
-            <div className="review-box">
+            <div className="review-box" ref={boxRef}>
               <SizedBox height="80px" />
               <div className="review-item">
-                <SizedBox width="20px" />
-                <p>
-                  <i
-                    class="arrow left"
-                    onClick={() => {
-                      if (reviewIdx > 0) {
-                        setReviewIdx(reviewIdx - 1);
-                      }
-                    }}
-                  ></i>
-                </p>
-                <div className="review-array">{renderReview(reviewIdx)}</div>
-                <p>
-                  <i
-                    class="arrow right"
-                    onClick={() => {
-                      if (reviewIdx < 2) {
-                        setReviewIdx(reviewIdx + 1);
-                      }
-                    }}
-                  ></i>
-                </p>
-                <SizedBox width="20px" />
+                <div className="review-array">
+                  {review(0)}
+                  {review(1)}
+                  {review(2)}
+                </div>
               </div>
               <SizedBox height="40px" />
               <div className="review-pagination">
@@ -268,9 +258,71 @@ function Home() {
                 <div className="review-pagination-dot"></div>
                 <SizedBox width="5px" />
                 <div className="review-pagination-dot"></div>
+                <div
+                  className={`review-pagination-dot-small`}
+                  ref={dotRef}
+                ></div>
               </div>
               <SizedBox height="50px" />
+              <p className="arrow_enclosure-left">
+                <i
+                  className="arrow left"
+                  onClick={() => {
+                    if (reviewIdx > 0) {
+                      reviewRefs[reviewIdx - 1].current.style.display = "block";
+                      const posX =
+                        reviewRefs[reviewIdx].current.offsetLeft -
+                        boxRef.current.offsetLeft;
+                      reviewRefs[reviewIdx - 1].current.style.position =
+                        "absolute";
+                      reviewRefs[reviewIdx - 1].current.style.left = `-${
+                        posX * 2 + reviewRefs[reviewIdx].current.offsetWidth
+                      }px`;
+                      // -310, -50, 210
+                      setDotPos(dotPos - 260);
+                      dotRef.current.style.transition = "transform 1s";
+                      setMoveRight(true);
+                      setTimeout(() => {
+                        setMoveRight(false);
+                        reviewRefs[reviewIdx].current.style.display = "none";
+                        reviewRefs[reviewIdx - 1].current.style.left = null;
+                        reviewRefs[reviewIdx - 1].current.style.position = null;
+                        setReviewIdx(reviewIdx - 1);
+                      }, 1000);
+                    }
+                  }}
+                ></i>
+              </p>
+              <p className="arrow_enclosure-right">
+                <i
+                  className="arrow right"
+                  onClick={() => {
+                    if (reviewIdx < 2) {
+                      reviewRefs[reviewIdx + 1].current.style.display = "block";
+                      const posX =
+                        reviewRefs[reviewIdx].current.offsetLeft -
+                        boxRef.current.offsetLeft;
+                      reviewRefs[reviewIdx + 1].current.style.position =
+                        "absolute";
+                      reviewRefs[reviewIdx + 1].current.style.right = `${
+                        posX * 2
+                      }px`;
+                      setDotPos(dotPos + 260);
+                      dotRef.current.style.transition = "transform 1s";
+                      setMoveLeft(true);
+                      setTimeout(() => {
+                        setMoveLeft(false);
+                        reviewRefs[reviewIdx].current.style.display = "none";
+                        reviewRefs[reviewIdx + 1].current.style.right = null;
+                        reviewRefs[reviewIdx + 1].current.style.position = null;
+                        setReviewIdx(reviewIdx + 1);
+                      }, 1000);
+                    }
+                  }}
+                ></i>
+              </p>
             </div>
+
             <SizedBox height="100px" />
           </div>
         </div>

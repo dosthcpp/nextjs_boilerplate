@@ -1,4 +1,10 @@
 .review {
+  &-0 {
+  }
+  &-1,
+  &-2 {
+    display: none;
+  }
   &-section {
     display: flex;
     flex-direction: row;
@@ -17,25 +23,27 @@
   }
 
   &-box {
+    position: relative;
     overflow: hidden;
     margin: 0 auto;
     background-color: #282b2a;
     border-radius: 10px;
     box-shadow: 2px 2px 5px black;
     width: 60%;
+    min-width: 60%;
+    height: 400px;
   }
 
   &-array {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
   }
 
   &-item {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    justify-content: center;
   }
 
   &-quotationmark {
@@ -52,7 +60,7 @@
   &-content {
     color: white;
     font-size: 20px;
-    width: 65%;
+    width: 35vw;
     margin: 0 auto;
     text-align: center;
   }
@@ -91,24 +99,57 @@
 
   &-pagination {
     display: flex;
-    flex-direction: row;
+    position: absolute;
     margin: 0 auto;
+    left: 0;
+    right: 0;
+    bottom: 40px;
+    flex-direction: row;
     justify-content: center;
 
     &-dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #828383;
+      background-color: #828383;
+
+      &-small {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        right: 0px;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+        background-color: white;
+      }
     }
   }
 }
 
-.arrow {
-  border: solid #828484;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
+.arrow_enclosure {
+  &-left,
+  &-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    & > .arrow {
+      border: solid #828484;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 3px;
+    }
+  }
+
+  &-left {
+    left: 20px;
+  }
+
+  &-right {
+    right: 20px;
+  }
 }
 
 .right {
@@ -121,4 +162,28 @@
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
   cursor: pointer;
+
+  top: 0;
+  bottom: 0;
+}
+
+.move-left {
+  transform: translateX(-175%);
+  transition: transform 1s;
+}
+
+.move-right {
+  transform: translateX(173%);
+  transition: transform 1s;
+}
+
+.dot-move-right {
+  transform: translate(0%, -50%);
+  transition: transform 1s;
+  animation-fill-mode: forwards;
+}
+
+.dot-move-left {
+  transform: translate(-300%, -50%);
+  transition: transform 1s;
 }
