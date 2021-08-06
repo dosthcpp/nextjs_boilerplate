@@ -6,12 +6,56 @@ import wrapper from "../store/configureStore";
 import { useDispatch, useSelector } from "react-redux";
 import { countPlusAction } from "../reducers/count";
 import { ColumnCentered, SizedBox } from "../utils/layout";
+import user from "../public/static/image/user.png";
 import "../public/style.css";
+import { useState } from "react";
 
 function Home() {
+  const [reviewIdx, setReviewIdx] = useState(0);
+  const reviewContent = [
+    "Dingo는 정말 놀라운 제품이에요. 제 모든 자료들을 한번에 살펴볼 수 있고, 복잡하게 탭을 왔다갔다 할 필요 없이 업무에 집중할 수 있어서 좋아요.",
+    "Dingo가 지난 몇달 간 이뤄온 성과는 상상을 초월합니다. 이 제품이 굉장한 파급력을 가져올 것이라 믿어 의심치 않아요.",
+    "여기저기 흩어진 자료 때문에 고민이었는데 백링크 기능 덕분에 큰 도움을 받았어요. 자료 추천 기능도 정말 기대되네요! Dingo의 지식 관리 체계는 제 시간과 노력을 상당히 절약해줬어요.",
+  ];
+
   const logoPlaceholder = () => (
     <img src={require("../public/seoul_logo.png")} width="100" />
   );
+
+  const review = (idx) => (
+    <div>
+      <div className="review-quotationmark">
+        <span>"</span>
+        <span>"</span>
+      </div>
+      <div className="review-content">{reviewContent[idx]}</div>
+      <SizedBox height="30px" />
+      <div className="review-tag">
+        <div className="review-tag-name-section">
+          <div className="review-tag-name-icon">
+            <img src={user} width="35px"></img>
+          </div>
+          <SizedBox width="10px" />
+          <div className="review-tag-name-column">
+            <div className="review-tag-name">Doyeon Baek</div>
+            <SizedBox height="5px" />
+            <div className="review-tag-name-sub">Nodennect 대표이사</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderReview = (idx) => {
+    switch (idx) {
+      case 0:
+      case 1:
+      case 2:
+        return review(idx);
+      default:
+        break;
+    }
+  };
 
   return (
     <>
@@ -182,6 +226,52 @@ function Home() {
               />
             </div>
             <SizedBox height="250px" />
+          </div>
+          <div className="section-3">
+            <SizedBox height="300px" />
+            <div className="review-section">
+              <span className="review-title">사용 후기</span>
+              <span className="review-title_">_</span>
+            </div>
+            <SizedBox height="100px" />
+            <div className="review-box">
+              <SizedBox height="80px" />
+              <div className="review-item">
+                <SizedBox width="20px" />
+                <p>
+                  <i
+                    class="arrow left"
+                    onClick={() => {
+                      if (reviewIdx > 0) {
+                        setReviewIdx(reviewIdx - 1);
+                      }
+                    }}
+                  ></i>
+                </p>
+                <div className="review-array">{renderReview(reviewIdx)}</div>
+                <p>
+                  <i
+                    class="arrow right"
+                    onClick={() => {
+                      if (reviewIdx < 2) {
+                        setReviewIdx(reviewIdx + 1);
+                      }
+                    }}
+                  ></i>
+                </p>
+                <SizedBox width="20px" />
+              </div>
+              <SizedBox height="40px" />
+              <div className="review-pagination">
+                <div className="review-pagination-dot"></div>
+                <SizedBox width="5px" />
+                <div className="review-pagination-dot"></div>
+                <SizedBox width="5px" />
+                <div className="review-pagination-dot"></div>
+              </div>
+              <SizedBox height="50px" />
+            </div>
+            <SizedBox height="100px" />
           </div>
         </div>
       </div>

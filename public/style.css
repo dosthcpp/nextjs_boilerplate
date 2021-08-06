@@ -1,7 +1,8 @@
 .root-1 {
   width: 100%; }
 
-.section-1 {
+.section-1,
+.section-3 {
   background-color: #232323; }
 
 .section-2 {
@@ -259,6 +260,107 @@
     margin: 0 auto;
     border-radius: 15px;
     box-shadow: 2px 2px 5px #888; }
+
+.review-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; }
+
+.review-title {
+  color: white;
+  font-size: 60px;
+  font-weight: bolder; }
+  .review-title_ {
+    color: #999999;
+    font-size: 60px;
+    font-weight: bolder; }
+
+.review-box {
+  overflow: hidden;
+  margin: 0 auto;
+  background-color: #282b2a;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px black;
+  width: 60%; }
+
+.review-array {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+
+.review-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+.review-quotationmark {
+  margin: 0 auto;
+  width: 40vw;
+  display: flex;
+  justify-content: space-between; }
+  .review-quotationmark > span {
+    color: #7985ed;
+    font-size: 50px; }
+
+.review-content {
+  color: white;
+  font-size: 20px;
+  width: 65%;
+  margin: 0 auto;
+  text-align: center; }
+
+.review-tag {
+  display: flex;
+  flex-direction: column; }
+  .review-tag-name {
+    color: white;
+    font-size: 12px; }
+    .review-tag-name-sub {
+      color: #767676;
+      font-size: 12px; }
+    .review-tag-name-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
+    .review-tag-name-section {
+      margin: 0 auto;
+      display: flex; }
+    .review-tag-name-icon {
+      background-color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+
+.review-pagination {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  justify-content: center; }
+  .review-pagination-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #828383; }
+
+.arrow {
+  border: solid #828484;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px; }
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  cursor: pointer; }
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  cursor: pointer; }
 
 .column-centered {
   display: flex;
