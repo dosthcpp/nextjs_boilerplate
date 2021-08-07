@@ -1,0 +1,46 @@
+@mixin box($box-height, $font-size) {
+  background-color: #343434;
+  color: #999999;
+  padding: 10px;
+  border-radius: 5px;
+  resize: none; /*remove the resize handle on the bottom right*/
+
+  &-placeholder {
+    font-size: $font-size;
+    height: $box-height;
+  }
+
+  [contenteditable="true"]:focus {
+    outline: none;
+  }
+
+  [contenteditable="true"]:empty:before {
+    content: attr(placeholder);
+    display: block; /* For Firefox */
+    font-size: $font-size;
+  }
+
+  &[contenteditable="true"] {
+    color: #333;
+    width: 300px;
+    padding: 5px;
+  }
+}
+
+@mixin inputMx {
+  &-placeholder {
+    background-color: transparent;
+    /* Remove */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    box-shadow: none;
+    caret-color: white;
+    color: white;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

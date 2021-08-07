@@ -14,6 +14,7 @@ function Home() {
   const boxRef = useRef(null);
   const dotRef = useRef(null);
   const [dotPos, setDotPos] = useState(-310);
+  const [isBtnDisabled, setIsBtnDisabled] = useState(false);
   const [reviewRefs, setReviewRefs] = useState([
     createRef(),
     createRef(),
@@ -235,96 +236,184 @@ function Home() {
             </div>
             <SizedBox height="250px" />
           </div>
-          <div className="section-3">
-            <SizedBox height="300px" />
-            <div className="review-section">
-              <span className="review-title">사용 후기</span>
-              <span className="review-title_">_</span>
+        </div>
+        <div className="section-3">
+          <SizedBox height="300px" />
+          <div className="review-section">
+            <span className="review-title">사용 후기</span>
+            <span className="review-title_">_</span>
+          </div>
+          <SizedBox height="100px" />
+          <div className="review-box" ref={boxRef}>
+            <SizedBox height="80px" />
+            <div className="review-item">
+              <div className="review-array">
+                {review(0)}
+                {review(1)}
+                {review(2)}
+              </div>
             </div>
-            <SizedBox height="100px" />
-            <div className="review-box" ref={boxRef}>
-              <SizedBox height="80px" />
-              <div className="review-item">
-                <div className="review-array">
-                  {review(0)}
-                  {review(1)}
-                  {review(2)}
+            <SizedBox height="40px" />
+            <div className="review-pagination">
+              <div className="review-pagination-dot"></div>
+              <SizedBox width="5px" />
+              <div className="review-pagination-dot"></div>
+              <SizedBox width="5px" />
+              <div className="review-pagination-dot"></div>
+              <div className={`review-pagination-dot-small`} ref={dotRef}></div>
+            </div>
+            <SizedBox height="50px" />
+            <p className="arrow_enclosure-left">
+              <i
+                className="arrow left"
+                onClick={() => {
+                  if (reviewIdx > 0 && !isBtnDisabled) {
+                    reviewRefs[reviewIdx - 1].current.style.display = "block";
+                    const posX =
+                      reviewRefs[reviewIdx].current.offsetLeft -
+                      boxRef.current.offsetLeft;
+                    reviewRefs[reviewIdx - 1].current.style.position =
+                      "absolute";
+                    reviewRefs[reviewIdx - 1].current.style.left = `-${
+                      posX * 2 + reviewRefs[reviewIdx].current.offsetWidth
+                    }px`;
+                    // -310, -50, 210
+                    setDotPos(dotPos - 260);
+                    dotRef.current.style.transition = "transform 1s";
+                    setMoveRight(true);
+                    setIsBtnDisabled(true);
+                    setTimeout(() => {
+                      setMoveRight(false);
+                      reviewRefs[reviewIdx].current.style.display = "none";
+                      reviewRefs[reviewIdx - 1].current.style.left = null;
+                      reviewRefs[reviewIdx - 1].current.style.position = null;
+                      setReviewIdx(reviewIdx - 1);
+                      setIsBtnDisabled(false);
+                    }, 1000);
+                  }
+                }}
+              ></i>
+            </p>
+            <p className="arrow_enclosure-right">
+              <i
+                className="arrow right"
+                onClick={() => {
+                  if (reviewIdx < 2 && !isBtnDisabled) {
+                    reviewRefs[reviewIdx + 1].current.style.display = "block";
+                    const posX =
+                      reviewRefs[reviewIdx].current.offsetLeft -
+                      boxRef.current.offsetLeft;
+                    reviewRefs[reviewIdx + 1].current.style.position =
+                      "absolute";
+                    reviewRefs[reviewIdx + 1].current.style.right = `${
+                      posX * 2
+                    }px`;
+                    setDotPos(dotPos + 260);
+                    dotRef.current.style.transition = "transform 1s";
+                    setMoveLeft(true);
+                    setIsBtnDisabled(true);
+                    setTimeout(() => {
+                      setMoveLeft(false);
+                      reviewRefs[reviewIdx].current.style.display = "none";
+                      reviewRefs[reviewIdx + 1].current.style.right = null;
+                      reviewRefs[reviewIdx + 1].current.style.position = null;
+                      setReviewIdx(reviewIdx + 1);
+                      setIsBtnDisabled(false);
+                    }, 1000);
+                  }
+                }}
+              ></i>
+            </p>
+          </div>
+          <SizedBox height="100px" />
+        </div>
+        <div className="section-4">
+          <SizedBox height="250px" />
+          <div className="opinion-section">
+            <div className="opinion-main-title">여러분의 의견을 들려주세요</div>
+            <SizedBox height="50px" />
+            <div className="opinionbox">
+              <div className="opinionbox-column">
+                <div className="opinionbox-comment">
+                  <div
+                    contentEditable={true}
+                    placeholder={"코멘트를 남겨주세요"}
+                    className="opinionbox-comment-placeholder"
+                  ></div>
+                </div>
+                <SizedBox height="10px" />
+                <div className="opinionbox-row">
+                  <div className="opinionbox-name">
+                    <input
+                      className="opinionbox-name-placeholder"
+                      placeholder="이름"
+                    />
+                  </div>
+                  <SizedBox width="8px" />
+                  <div className="opinionbox-email">
+                    <input
+                      className="opinionbox-email-placeholder"
+                      placeholder="이메일 주소"
+                    ></input>
+                  </div>
+                  <SizedBox width="8px" />
+                  <div className="opinionbox-btn">Comment</div>
+                </div>
+                <SizedBox height="60px" />
+                <div className="opinionbox-update">
+                  최신 업데이트 소식을 확인하세요. {">"}
                 </div>
               </div>
-              <SizedBox height="40px" />
-              <div className="review-pagination">
-                <div className="review-pagination-dot"></div>
-                <SizedBox width="5px" />
-                <div className="review-pagination-dot"></div>
-                <SizedBox width="5px" />
-                <div className="review-pagination-dot"></div>
-                <div
-                  className={`review-pagination-dot-small`}
-                  ref={dotRef}
-                ></div>
+              <SizedBox width="30px" />
+              <div className="opinionbox-column">
+                <div className="opinionbox-comment-item">
+                  <div className="opinionbox-comment-item-title">최병규</div>
+                  <SizedBox height="10px" />
+                  <div className="opinionbox-comment-item-content">
+                    포털사이트에 오픈되어 있는 원하는 정보는 수집이 가능한가요?
+                    예를 들어 업체 정보, 부동산 정보 등 엑셀 파일로 저장
+                    가능한가요?
+                  </div>
+                </div>
+                <SizedBox height="15px" />
+                <div className="opinionbox-comment-item">
+                  <div className="opinionbox-comment-item-title">장유진</div>
+                  <SizedBox height="10px" />
+                  <div className="opinionbox-comment-item-content">
+                    문서별로 자료를 정리하고 한눈에 볼수 있다는 부분이 너무
+                    편해요! 계속 좋은 제품 기대할게요!
+                  </div>
+                </div>
+                <SizedBox height="15px" />
+                <div className="opinionbox-comment-item">
+                  <div className="opinionbox-comment-item-title">유비</div>
+                  <SizedBox height="10px" />
+                  <div className="opinionbox-comment-item-content">
+                    에버노트 쓰고 있는데 앞으로 타입드만 쓸것 같아요
+                  </div>
+                </div>
+                <SizedBox height="15px" />
+                <div className="opinionbox-comment-item">
+                  <div className="opinionbox-comment-item-title">김민지</div>
+                  <SizedBox height="10px" />
+                  <div className="opinionbox-comment-item-content">
+                    타입드 사용하고 문서작성 과정이 훨씬 단축된 것 같아요.
+                  </div>
+                </div>
+                <SizedBox height="15px" />
+                <div className="opinionbox-comment-item">
+                  <div className="opinionbox-comment-item-title">Teddy</div>
+                  <SizedBox height="10px" />
+                  <div className="opinionbox-comment-item-content">
+                    Best way to power up my document {"&"} research work. Look
+                    forward to official version 1.0
+                  </div>
+                </div>
+                <SizedBox height="15px" />
               </div>
-              <SizedBox height="50px" />
-              <p className="arrow_enclosure-left">
-                <i
-                  className="arrow left"
-                  onClick={() => {
-                    if (reviewIdx > 0) {
-                      reviewRefs[reviewIdx - 1].current.style.display = "block";
-                      const posX =
-                        reviewRefs[reviewIdx].current.offsetLeft -
-                        boxRef.current.offsetLeft;
-                      reviewRefs[reviewIdx - 1].current.style.position =
-                        "absolute";
-                      reviewRefs[reviewIdx - 1].current.style.left = `-${
-                        posX * 2 + reviewRefs[reviewIdx].current.offsetWidth
-                      }px`;
-                      // -310, -50, 210
-                      setDotPos(dotPos - 260);
-                      dotRef.current.style.transition = "transform 1s";
-                      setMoveRight(true);
-                      setTimeout(() => {
-                        setMoveRight(false);
-                        reviewRefs[reviewIdx].current.style.display = "none";
-                        reviewRefs[reviewIdx - 1].current.style.left = null;
-                        reviewRefs[reviewIdx - 1].current.style.position = null;
-                        setReviewIdx(reviewIdx - 1);
-                      }, 1000);
-                    }
-                  }}
-                ></i>
-              </p>
-              <p className="arrow_enclosure-right">
-                <i
-                  className="arrow right"
-                  onClick={() => {
-                    if (reviewIdx < 2) {
-                      reviewRefs[reviewIdx + 1].current.style.display = "block";
-                      const posX =
-                        reviewRefs[reviewIdx].current.offsetLeft -
-                        boxRef.current.offsetLeft;
-                      reviewRefs[reviewIdx + 1].current.style.position =
-                        "absolute";
-                      reviewRefs[reviewIdx + 1].current.style.right = `${
-                        posX * 2
-                      }px`;
-                      setDotPos(dotPos + 260);
-                      dotRef.current.style.transition = "transform 1s";
-                      setMoveLeft(true);
-                      setTimeout(() => {
-                        setMoveLeft(false);
-                        reviewRefs[reviewIdx].current.style.display = "none";
-                        reviewRefs[reviewIdx + 1].current.style.right = null;
-                        reviewRefs[reviewIdx + 1].current.style.position = null;
-                        setReviewIdx(reviewIdx + 1);
-                      }, 1000);
-                    }
-                  }}
-                ></i>
-              </p>
             </div>
-
-            <SizedBox height="100px" />
           </div>
+          <SizedBox height="250px" />
         </div>
       </div>
     </>

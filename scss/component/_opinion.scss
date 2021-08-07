@@ -1,0 +1,114 @@
+@import "../utils/mixins";
+
+.opinion {
+  &-main-title {
+    color: white;
+    font-size: 40px;
+    font-weight: 800;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 1000px;
+  }
+}
+
+.opinionbox {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  max-width: 1000px;
+  margin: 0 auto;
+  justify-content: center;
+
+  &-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  &-comment {
+    @include box(20px, 12px);
+    overflow: scroll;
+    height: 100px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &-item {
+      background-color: #292929;
+      width: 100%;
+      align-items: center;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      border-radius: 5px;
+
+      &-content,
+      &-title {
+        font-size: 15px;
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      &-title {
+        color: white;
+        font-weight: 500;
+      }
+
+      &-content {
+        color: #6d6c6c;
+        font-weight: 500;
+      }
+    }
+  }
+
+  &-name {
+    @include box(25px, 15px);
+    flex: 0 1 35%;
+
+    @include inputMx();
+  }
+
+  &-email {
+    @include box(25px, 15px);
+    flex: 0 1 40%;
+
+    @include inputMx();
+  }
+
+  &-btn {
+    flex: 0 1 25%;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    resize: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &-update {
+    background-color: #2d4054;
+    color: #5794da;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 5px;
+    resize: none;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: #242e37;
+    }
+  }
+}
