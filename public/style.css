@@ -572,6 +572,43 @@
     transition: 0.5s; }
     .opinionbox-update:hover {
       background-color: #242e37; }
+  .opinionbox-pagination {
+    margin: 0 auto;
+    width: 80%;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; }
+    .opinionbox-pagination-number-1 {
+      color: #646463; }
+    .opinionbox-pagination-number-2 {
+      color: #646463; }
+    .opinionbox-pagination-number-3 {
+      color: #646463; }
+    .opinionbox-pagination-number-4 {
+      color: #646463; }
+    .opinionbox-pagination-number-5 {
+      color: #646463; }
+    .opinionbox-pagination-number-6 {
+      color: #646463; }
+    .opinionbox-pagination-number-7 {
+      display: none; }
+    .opinionbox-pagination-number-8 {
+      display: none; }
+    .opinionbox-pagination-number-9 {
+      display: none; }
+    .opinionbox-pagination-number-10 {
+      display: none; }
+    .opinionbox-pagination-number-11 {
+      display: none; }
+    .opinionbox-pagination-number-12 {
+      display: none; }
+    .opinionbox-pagination-number-13 {
+      color: #646463; }
+    .opinionbox-pagination-number-14 {
+      color: #646463; }
+    .opinionbox-pagination-number-15 {
+      color: #646463; }
 
 .column-centered {
   display: flex;

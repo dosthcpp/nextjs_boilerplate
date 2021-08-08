@@ -111,4 +111,25 @@
       background-color: #242e37;
     }
   }
+
+  &-pagination {
+    margin: 0 auto;
+    width: 80%;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &-number {
+      @for $i from 1 through 15 {
+        &-#{$i} {
+          @if $i > 6 and $i < 13 {
+            display: none;
+          } @else {
+            color: #646463;
+          }
+        }
+      }
+    }
+  }
 }

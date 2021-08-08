@@ -8,7 +8,7 @@ import { countPlusAction } from "../reducers/count";
 import { ColumnCentered, SizedBox } from "../utils/layout";
 import user from "../public/static/image/user.png";
 import "../public/style.css";
-import { createRef, useEffect, useRef, useState } from "react";
+import { createRef, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 function Home() {
   const boxRef = useRef(null);
@@ -28,6 +28,8 @@ function Home() {
     "Dingo가 지난 몇달 간 이뤄온 성과는 상상을 초월합니다. 이 제품이 굉장한 파급력을 가져올 것이라 믿어 의심치 않아요.",
     "여기저기 흩어진 자료 때문에 고민이었는데 백링크 기능 덕분에 큰 도움을 받았어요. 자료 추천 기능도 정말 기대되네요! Dingo의 지식 관리 체계는 제 시간과 노력을 상당히 절약해줬어요.",
   ];
+  const [opinionIdx, setOpinionIdx] = useState([]);
+  const [opinionRefs, setOpinionRefs] = useState([]);
 
   const logoPlaceholder = () => (
     <img src={require("../public/seoul_logo.png")} width="100" />
@@ -65,6 +67,41 @@ function Home() {
   useEffect(() => {
     dotRef.current.style.transform = `translate(${dotPos}%, -50%)`;
   }, [dotPos]);
+
+  useEffect(() => {
+    // 1~5, 11~15까진 괜찮고 중간에 누르면 ... 뜸
+    let arr = [];
+    let refArr = [];
+    for (var i = 0; i < 15; ++i) {
+      arr.push((i + 1).toString());
+      refArr.push(createRef());
+    }
+    setOpinionIdx((old) => {
+      return [...old, ...arr];
+    });
+    setOpinionRefs((old) => {
+      return [...old, ...refArr];
+    });
+  }, [setOpinionIdx, setOpinionRefs]);
+
+  useEffect(() => {
+    if (opinionRefs && opinionRefs.length != 0) {
+      var i = 0;
+      for (
+        ;
+        i < opinionRefs.length - 1 &&
+        !(
+          opinionRefs[i].current.style.display === "block" &&
+          opinionRefs[i + 1].current.style.display === "none"
+        );
+        ++i
+      );
+      if (i < opinionRefs.length - 1) {
+        console.log(opinionRefs[i].current);
+      } else {
+      }
+    }
+  }, [opinionRefs]);
 
   return (
     <>
@@ -410,6 +447,16 @@ function Home() {
                   </div>
                 </div>
                 <SizedBox height="15px" />
+                <div className="opinionbox-pagination">
+                  {opinionIdx.map((idx) => (
+                    <div
+                      className={`opinionbox-pagination-number-${idx}`}
+                      ref={opinionRefs[idx - 1]}
+                    >
+                      {idx}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
