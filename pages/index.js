@@ -3,14 +3,15 @@
 
 import Head from "next/head";
 import wrapper from "../store/configureStore";
-import { useDispatch, useSelector } from "react-redux";
-import { countPlusAction } from "../reducers/count";
 import { ColumnCentered, SizedBox } from "../utils/layout";
 import user from "../public/static/image/user.png";
 import "../public/style.css";
-import { createRef, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createRef, useCallback, useEffect, useRef, useState } from "react";
+import $ from "jquery";
 
 function Home() {
+  const arrLength = 15;
+
   const boxRef = useRef(null);
   const dotRef = useRef(null);
   const [dotPos, setDotPos] = useState(-310);
@@ -28,8 +29,24 @@ function Home() {
     "Dingo가 지난 몇달 간 이뤄온 성과는 상상을 초월합니다. 이 제품이 굉장한 파급력을 가져올 것이라 믿어 의심치 않아요.",
     "여기저기 흩어진 자료 때문에 고민이었는데 백링크 기능 덕분에 큰 도움을 받았어요. 자료 추천 기능도 정말 기대되네요! Dingo의 지식 관리 체계는 제 시간과 노력을 상당히 절약해줬어요.",
   ];
-  const [opinionIdx, setOpinionIdx] = useState([]);
-  const [opinionRefs, setOpinionRefs] = useState([]);
+
+  const originalIdx = [...Array(15).keys()].map((idx) => (
+    <div
+      key={idx}
+      className={`opinionbox-pagination-number-${idx + 1}`}
+      style={{
+        cursor: "pointer",
+      }}
+      onClick={() => {
+        setCurIdx(idx + 1);
+        onTapIdx(idx + 1);
+      }}
+    >
+      {idx + 1}
+    </div>
+  ));
+  const [opinionIdx, setOpinionIdx] = useState(originalIdx);
+  const [curIdx, setCurIdx] = useState(1);
 
   const logoPlaceholder = () => (
     <img src={require("../public/seoul_logo.png")} width="100" />
@@ -64,44 +81,119 @@ function Home() {
     </div>
   );
 
+  const block = (start, end) => {
+    for (let i = start; i <= end; ++i) {
+      $(`.opinionbox-pagination-number-${i}`).css("display", "block");
+      $(`.opinionbox-pagination-number-${i}`).css("color", "#646463");
+    }
+  };
+
+  const nonify = (start, end) => {
+    for (let i = start; i <= end; ++i) {
+      $(`.opinionbox-pagination-number-${i}`).css("display", "none");
+    }
+  };
+
+  const insertDots = (arr, i, idx) => {
+    arr.splice(
+      i,
+      0,
+      <div
+        className={`opinionbox-pagination-number-threedots-${idx}`}
+        style={{ display: "block" }}
+      >
+        ...
+      </div>
+    );
+  };
+
+  const renderDots = useCallback(
+    (idx) => {
+      let i = idx;
+      for (
+        ;
+        i < arrLength &&
+        !(
+          $(`.opinionbox-pagination-number-${i}`).css("display") === "block" &&
+          $(`.opinionbox-pagination-number-${i + 1}`).css("display") === "none"
+        );
+        ++i
+      );
+      if (i < arrLength - 1) {
+        block(1, i);
+        const arr = Array.from(originalIdx);
+        arr.splice(
+          i,
+          0,
+          <div className={`opinionbox-pagination-number-threedots-1`}>...</div>
+        );
+        setOpinionIdx((_) => arr);
+      }
+    },
+    [arrLength, setOpinionIdx]
+  );
+
+  const onTapIdx = useCallback(
+    (idx) => {
+      const arr = Array.from(originalIdx);
+
+      const setVisible = () => {
+        insertDots(arr, 15, 2);
+
+        block(1, 1);
+        nonify(2, idx - 2);
+        block(idx - 1, idx + 1);
+        nonify(idx + 2, 15);
+        block(15, 15);
+      };
+
+      if (idx >= 1 && idx <= 5) {
+        block(1, 6);
+        nonify(7, 12);
+        block(13, 15);
+
+        insertDots(arr, 6, 1);
+        setOpinionIdx((_) => arr);
+      } else if (idx == 6) {
+        insertDots(arr, idx - 2, 1);
+        setVisible();
+
+        setOpinionIdx((_) => arr);
+      } else if (idx > 6 && idx <= 11) {
+        insertDots(arr, 1, 1);
+        setVisible();
+
+        $(`.opinionbox-pagination-number-threedots-2`).css("display", "block");
+      } else if (idx >= 12 && idx <= 15) {
+        insertDots(arr, 2, 1);
+
+        block(1, 1);
+        nonify(2, 10);
+        block(11, 15);
+
+        $(`.opinionbox-pagination-number-threedots-2`).css("display", "none");
+      }
+    },
+    [arrLength, setOpinionIdx]
+  );
+
   useEffect(() => {
     dotRef.current.style.transform = `translate(${dotPos}%, -50%)`;
   }, [dotPos]);
 
   useEffect(() => {
-    // 1~5, 11~15까진 괜찮고 중간에 누르면 ... 뜸
     let arr = [];
-    let refArr = [];
     for (var i = 0; i < 15; ++i) {
       arr.push((i + 1).toString());
-      refArr.push(createRef());
     }
-    setOpinionIdx((old) => {
-      return [...old, ...arr];
+    setOpinionIdx((_) => {
+      return arr;
     });
-    setOpinionRefs((old) => {
-      return [...old, ...refArr];
-    });
-  }, [setOpinionIdx, setOpinionRefs]);
+  }, []);
 
   useEffect(() => {
-    if (opinionRefs && opinionRefs.length != 0) {
-      var i = 0;
-      for (
-        ;
-        i < opinionRefs.length - 1 &&
-        !(
-          opinionRefs[i].current.style.display === "block" &&
-          opinionRefs[i + 1].current.style.display === "none"
-        );
-        ++i
-      );
-      if (i < opinionRefs.length - 1) {
-        console.log(opinionRefs[i].current);
-      } else {
-      }
-    }
-  }, [opinionRefs]);
+    renderDots(curIdx);
+  }, [renderDots]);
 
   return (
     <>
@@ -447,20 +539,84 @@ function Home() {
                   </div>
                 </div>
                 <SizedBox height="15px" />
-                <div className="opinionbox-pagination">
-                  {opinionIdx.map((idx) => (
-                    <div
-                      className={`opinionbox-pagination-number-${idx}`}
-                      ref={opinionRefs[idx - 1]}
-                    >
-                      {idx}
-                    </div>
-                  ))}
-                </div>
+                <div className="opinionbox-pageNo">{`#${curIdx}`}</div>
+                <SizedBox height="10px" />
+                <div className="opinionbox-pagination">{opinionIdx}</div>
               </div>
             </div>
           </div>
-          <SizedBox height="250px" />
+          <SizedBox height="150px" />
+        </div>
+        <div className="section-5">
+          <SizedBox height="200px" />
+          <div className="submitform-title">
+            문서를 넘어선 지식의 창조, Dingo.
+          </div>
+          <SizedBox height="50px" />
+          <div className="submitform">
+            <div className="submitform__email">
+              <div
+                contentEditable={true}
+                placeholder={"이메일을 입력하세요"}
+                className="submitform__email-placeholder"
+              ></div>
+            </div>
+            <div className="submitform__button">베타 가입</div>
+          </div>
+          <SizedBox height="20px" />
+          <div className="submitform-sub">
+            이 양식을 제출함으로써 귀하는 뉴스, 이벤트, 업데이트 등을 포함하여
+            당사로부터 마케팅 관련 전자 통신을 수신하는 데 동의합니다.
+          </div>
+          <SizedBox height="200px" />
+        </div>
+        <div className="section-6">
+          <SizedBox height="50px" />
+          <div className="footer-row">
+            <div className="footer-column">
+              <div className="footer-logo">Dingo</div>
+              <div className="footer-logo-line"></div>
+              <div className="footer-logo-sub">
+                BUSINESS
+                <br />
+                CANVAS
+              </div>
+            </div>
+            <div className="footer-column">
+              <div className="footer-menu-0-title">Typed</div>
+              <div className="footer-menu-0-1">회사정보</div>
+              <div className="footer-menu-0-2">인재 채용</div>
+              <div className="footer-menu-0-3">공고</div>
+            </div>
+            <div className="footer-column">
+              <div className="footer-menu-1-title">제품</div>
+              <div className="footer-menu-1-1">서비스 소개서(EN)</div>
+              <div className="footer-menu-1-2">서비스 소개서(KR)</div>
+              <div className="footer-menu-1-3">튜토리얼 영상</div>
+              <div className="footer-menu-1-4">제품 철학</div>
+            </div>
+            <div className="footer-column">
+              <div className="footer-menu-2-title">링크</div>
+              <div className="footer-menu-2-1">블로그(영)</div>
+              <div className="footer-menu-2-2">블로그(한)</div>
+              <div className="footer-menu-2-3">유튜브</div>
+              <div className="footer-menu-2-4">트위터</div>
+            </div>
+            <div className="footer-column">
+              <div className="footer-menu-3-title">문의하기</div>
+              <div className="footer-menu-3-1">doyeon.baek@nodennect.com</div>
+              <div className="footer-menu-3-2">02-6091-1755</div>
+              <div className="footer-menu-3-3">
+                서울 강남구 역삼동 선릉로 428, 10층 114호
+              </div>
+            </div>
+          </div>
+          <SizedBox height="100px" />
+          <div className="footer-copyright">
+            Copyright © Nodennect Inc. All rights reserved. Terms of Service
+            Privacy Policy
+          </div>
+          <SizedBox height="30px" />
         </div>
       </div>
     </>

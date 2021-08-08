@@ -1,0 +1,62 @@
+.footer {
+  &-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  &-column {
+    display: flex;
+    flex-direction: column;
+
+    &:not(:first-child) {
+      padding-top: 30px;
+    }
+  }
+
+  &-logo {
+    color: white;
+    font-weight: 900;
+    font-size: 50px;
+
+    &-line {
+      width: 100%;
+      margin-top: 20px;
+      border-top: 1px solid white;
+      margin-bottom: 20px;
+    }
+
+    &-sub {
+      color: white;
+      font-weight: 900;
+      letter-spacing: 10px;
+      font-size: 25px;
+    }
+  }
+
+  &-menu {
+    @for $i from 0 through 3 {
+      &-#{$i} {
+        &-title {
+          color: white;
+          font-size: 14px;
+          padding-bottom: 20px;
+        }
+
+        @for $j from 1 through 4 {
+          &-#{$j} {
+            color: #757475;
+            font-size: 14px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  &-copyright {
+    color: #757475;
+    text-align: center;
+  }
+}

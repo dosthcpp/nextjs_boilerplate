@@ -112,6 +112,11 @@
     }
   }
 
+  &-pageNo {
+    color: #646463;
+    text-align: center;
+  }
+
   &-pagination {
     margin: 0 auto;
     width: 80%;
@@ -121,6 +126,12 @@
     justify-content: space-between;
 
     &-number {
+      &-threedots {
+        &-1,
+        &-2 {
+          color: #646463;
+        }
+      }
       @for $i from 1 through 15 {
         &-#{$i} {
           @if $i > 6 and $i < 13 {
