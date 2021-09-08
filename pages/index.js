@@ -228,7 +228,7 @@ function Home() {
             <div className="slogan__sub">
               Nodennect는 지식 관리의 새로운 패러다임을 제시합니다. 흩어져있던
               자료가 가치 있는 지식이 될 때까지, 여러분이 원하는 방식으로 자료를
-              관리하고, 손쉽게 문서를 작성해보세요.
+              관리하고, 손쉽게 문서를 작성해 보세요.
             </div>
             <SizedBox height="50px" />
             <div className="registerbox">
