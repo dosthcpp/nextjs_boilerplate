@@ -2,16 +2,13 @@
   &-row {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    position: relative;
+    left: 15%;
   }
 
   &-column {
     display: flex;
     flex-direction: column;
-
-    &:not(:first-child) {
-      padding-top: 30px;
-    }
   }
 
   &-logo {
@@ -35,12 +32,17 @@
   }
 
   &-menu {
-    @for $i from 0 through 3 {
+    @for $i from 0 through 1 {
       &-#{$i} {
         &-title {
           color: white;
-          font-size: 14px;
-          padding-bottom: 20px;
+          font-size: 20px;
+          font-weight: 800;
+        }
+
+        &-divider {
+          border-top: 1px solid white;
+          width: 100px;
         }
 
         @for $j from 1 through 4 {
@@ -55,8 +57,20 @@
     }
   }
 
+  &-option {
+    width: 150px;
+  }
+
+  &-options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    left: 15%;
+  }
+
   &-copyright {
     color: #757475;
-    text-align: center;
+    text-align: right;
   }
 }

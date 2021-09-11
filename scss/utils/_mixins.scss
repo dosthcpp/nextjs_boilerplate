@@ -44,3 +44,18 @@
     }
   }
 }
+
+@mixin leftAlign {
+  position: relative;
+  left: 15%;
+}
+
+@mixin alignRow {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin alignColumn {
+  display: flex;
+  flex-direction: column;
+}

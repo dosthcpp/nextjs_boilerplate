@@ -1,7 +1,8 @@
 import React from "react";
+import header from "../components/header";
 
 function About() {
-  return <div>asdf</div>;
+  return <div>{header()}</div>;
 }
 
 export default About;

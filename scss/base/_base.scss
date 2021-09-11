@@ -1,20 +1,22 @@
-.root-1 {
-  width: 100%;
+.root {
+  overflow: hidden;
 }
 
 .section-1,
-.section-4 {
+.section-2,
+.section-5 {
   background-color: #232323;
 }
 
-.section-2 {
+.section-3 {
   background-color: white;
 }
 
-.section-3 {
+.section-4 {
   background-color: #e1e1e1;
 }
 
-.section-6 {
+.footer {
   background-color: #131312;
+  overflow-x: hidden;
 }

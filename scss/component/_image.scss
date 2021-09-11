@@ -1,0 +1,45 @@
+.image_section {
+  &__logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &__text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 50%;
+    font-size: 20px;
+    font-weight: 800;
+  }
+
+  &__partners {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 50%;
+    font-size: 20px;
+    font-weight: 800;
+
+    &-list {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+  }
+
+  &__logo {
+    &-kised,
+    &-kibo,
+    &-ecti {
+      cursor: pointer;
+    }
+    &-user {
+      border-radius: 50%;
+      border: 1px solid black;
+    }
+  }
+}
