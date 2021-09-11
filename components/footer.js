@@ -1,6 +1,9 @@
 import { SizedBox } from "../utils/layout";
 import Select from "react-select";
 import Image from "next/image";
+import logo_facebook from "../public/logo_facebook.png";
+import logo_youtube from "../public/logo_youtube.png";
+import logo_medium from "../public/logo_medium.png";
 
 const Footer = ({ language, setState }) => {
   return (
@@ -69,7 +72,7 @@ const Footer = ({ language, setState }) => {
           style={{
             cursor: "pointer",
           }}
-          src={"/../public/logo_facebook.png"}
+          src={logo_facebook}
           width="20"
           height="20"
           quality="100"
@@ -83,7 +86,7 @@ const Footer = ({ language, setState }) => {
           style={{
             cursor: "pointer",
           }}
-          src={"/../public/logo_youtube.png"}
+          src={logo_youtube}
           width="20"
           height="20"
           quality="100"
@@ -97,7 +100,7 @@ const Footer = ({ language, setState }) => {
           style={{
             cursor: "pointer",
           }}
-          src={"/../public/logo_medium.png"}
+          src={logo_medium}
           width="20"
           height="20"
           quality="100"

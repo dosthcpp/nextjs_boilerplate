@@ -3,6 +3,11 @@
 
 import Head from "next/head";
 import Image from "next/image";
+import logo from "../public/logo.png";
+import logo_kised from "../public/logo_kised.jpeg";
+import logo_kibo from "../public/logo_kibo.jpg";
+import logo_ecti from "../public/logo_ecti.png";
+import professor from "../public/professor.jpeg";
 import wrapper from "../store/configureStore";
 import { useRouter } from "next/dist/client/router";
 import Footer from "../components/footer";
@@ -573,7 +578,7 @@ function Home() {
               <ImageContainer>
                 <Image
                   className="image_section__logo"
-                  src="/../public/logo.png"
+                  src={logo}
                   width="162"
                   height="26"
                   quality="100"
@@ -602,7 +607,7 @@ function Home() {
               >
                 <Image
                   className="image_section__logo-kised"
-                  src={"/../public/logo_kised.jpeg"}
+                  src={logo_kised}
                   onClick={() => {
                     const win = window.open(
                       "https://www.kised.or.kr/",
@@ -642,7 +647,7 @@ function Home() {
               >
                 <Image
                   className="image_section__logo-kibo"
-                  src={"/../public/logo_kibo.jpg"}
+                  src={logo_kibo}
                   onClick={() => {
                     const win = window.open(
                       "https://www.kised.or.kr/",
@@ -681,7 +686,7 @@ function Home() {
               >
                 <Image
                   className="image_section__logo-ecti"
-                  src={"/../public/logo_ecti.png"}
+                  src={logo_ecti}
                   onClick={() => {
                     const win = window.open(
                       "https://www.kised.or.kr/",
@@ -720,7 +725,7 @@ function Home() {
               >
                 <Image
                   className="image_section__logo-user"
-                  src={"/../public/professor.jpeg"}
+                  src={professor}
                   onClick={() => {
                     const win = window.open(
                       "https://www.kised.or.kr/",
