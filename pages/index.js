@@ -6,7 +6,7 @@ import wrapper from "../store/configureStore";
 import { useRouter } from "next/dist/client/router";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import { SizedBox } from "../utils/layout";
+import { Column, SizedBox } from "../utils/layout";
 import user from "../public/static/image/user.png";
 import "../public/style.css";
 import { createRef, useCallback, useEffect, useRef, useState } from "react";
@@ -570,51 +570,171 @@ function Home() {
               />
               <SizedBox height="120px" />
               <div className="image_section__text">
-                "Experience and meet with us, Wherever You Go."
+                {language == "korean"
+                  ? "우리의 고객들이 어디에서든 우리를 만나고 경험할 수 있도록."
+                  : "Experience and meet with us, Wherever You Go."}
               </div>
             </div>
             <SizedBox height="300px" />
-            <div className="image_section__partners">Our Partners</div>
+            <div className="image_section__partners">
+              {language == "korean" ? "파트너" : "Our Partners"}
+            </div>
             <SizedBox height="50px" />
             <div className="image_section__partners-list">
-              <img
-                className="image_section__logo-kised"
-                src={require("../public/logo_kised.jpeg")}
-                onClick={() => {
-                  const win = window.open("https://www.kised.or.kr/", "_blank");
-                  win.focus();
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  fontSize: "12px",
                 }}
-                width="100"
-              />
-              <img
-                className="image_section__logo-kibo"
-                src={require("../public/logo_kibo.jpg")}
-                onClick={() => {
-                  const win = window.open(
-                    "https://www.kibo.or.kr/main/index.do",
-                    "_blank"
-                  );
-                  win.focus();
+              >
+                <img
+                  className="image_section__logo-kised"
+                  src={require("../public/logo_kised.jpeg")}
+                  onClick={() => {
+                    const win = window.open(
+                      "https://www.kised.or.kr/",
+                      "_blank"
+                    );
+                    win.focus();
+                  }}
+                  width="100"
+                  height="50"
+                />
+                <SizedBox height="15px" />
+                {language == "korean" ? (
+                  <div></div>
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      fontSize: "12px",
+                    }}
+                  >
+                    <div>Korea Institute of Startup</div>
+                    <div>and Entrepreneurship Development</div>
+                  </div>
+                )}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  fontSize: "12px",
                 }}
-                width="100"
-              />
-              <img
-                className="image_section__logo-ecti"
-                src={require("../public/logo_ecti.jpeg")}
-                onClick={() => {
-                  const win = window.open(
-                    "http://www.xn--9d0b408a0kduva94b252cvya.com/",
-                    "_blank"
-                  );
-                  win.focus();
+              >
+                <img
+                  className="image_section__logo-kibo"
+                  src={require("../public/logo_kibo.jpg")}
+                  onClick={() => {
+                    const win = window.open(
+                      "https://www.kibo.or.kr/main/index.do",
+                      "_blank"
+                    );
+                    win.focus();
+                  }}
+                  width="100"
+                  height="40"
+                />
+                <SizedBox height="15px" />
+                {language == "korean" ? (
+                  <div></div>
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      fontSize: "12px",
+                    }}
+                  >
+                    <div>Technology Guarantee Fund</div>
+                  </div>
+                )}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  fontSize: "12px",
                 }}
-                width="100"
-              />
-              <img
-                className="image_section__logo-user"
-                src={require("../public/static/image/user.png")}
-                width="50"
-              />
+              >
+                <img
+                  className="image_section__logo-ecti"
+                  src={require("../public/logo_ecti.jpeg")}
+                  onClick={() => {
+                    const win = window.open(
+                      "http://www.xn--9d0b408a0kduva94b252cvya.com/",
+                      "_blank"
+                    );
+                    win.focus();
+                  }}
+                  width="100"
+                  height="50"
+                />
+                <SizedBox height="15px" />
+                {language == "korean" ? (
+                  <div></div>
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      fontSize: "12px",
+                    }}
+                  >
+                    <div>Korea Association of</div>
+                    <div>Kindergarten Teachers</div>
+                  </div>
+                )}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  fontSize: "12px",
+                }}
+              >
+                <img
+                  className="image_section__logo-user"
+                  src={require("../public/professor.jpeg")}
+                  width="70"
+                />
+                <SizedBox height="15px" />
+                {language == "korean" ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      fontSize: "12px",
+                    }}
+                  >
+                    <div>충남대학교 경상대학</div>
+                    <div>홍은영 연구교수</div>
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      fontSize: "12px",
+                    }}
+                  >
+                    <div>Sophie Hong</div>
+                    <div>Research Professor</div>
+                    <div>Ph.D. Chungnam Nat'l University</div>
+                  </div>
+                )}
+              </div>
             </div>
             <SizedBox height="100px" />
           </div>

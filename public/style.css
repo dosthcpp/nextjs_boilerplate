@@ -800,6 +800,7 @@
   font-weight: 800; }
   .image_section__partners-list {
     display: flex;
+    flex-direction: row;
     justify-content: space-evenly;
     align-items: center; }
 
@@ -807,8 +808,7 @@
   cursor: pointer; }
 
 .image_section__logo-user {
-  border-radius: 50%;
-  border: 1px solid black; }
+  border-radius: 50%; }
 
 .introduction_section__vision-quote, .introduction_section__mission-quote {
   position: relative;
