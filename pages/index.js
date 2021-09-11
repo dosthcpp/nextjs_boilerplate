@@ -6,6 +6,7 @@ import wrapper from "../store/configureStore";
 import { useRouter } from "next/dist/client/router";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import Resizer from "react-image-file-resizer";
 import { Column, SizedBox } from "../utils/layout";
 import user from "../public/static/image/user.png";
 import "../public/style.css";
@@ -666,7 +667,7 @@ function Home() {
               >
                 <img
                   className="image_section__logo-ecti"
-                  src={require("../public/logo_ecti.jpeg")}
+                  src={require("../public/logo_ecti.png")}
                   onClick={() => {
                     const win = window.open(
                       "http://www.xn--9d0b408a0kduva94b252cvya.com/",

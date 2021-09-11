@@ -776,6 +776,9 @@
   color: #757475;
   text-align: right; }
 
+.select__input {
+  color: transparent; }
+
 .image_section__logo {
   position: absolute;
   left: 50%;

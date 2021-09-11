@@ -61,9 +61,13 @@ const Footer = ({ language, setState }) => {
             { value: "english", label: "English" },
             { value: "korean", label: "한국어" },
           ]}
+          classNamePrefix="select"
         />
         <SizedBox width="30px" />
         <img
+          style={{
+            cursor: "pointer",
+          }}
           src={require("../public/logo_facebook.png")}
           width="20"
           onClick={() => {
@@ -73,6 +77,9 @@ const Footer = ({ language, setState }) => {
         />
         <SizedBox width="20px" />
         <img
+          style={{
+            cursor: "pointer",
+          }}
           src={require("../public/logo_youtube.png")}
           width="20"
           onClick={() => {
@@ -82,6 +89,9 @@ const Footer = ({ language, setState }) => {
         />
         <SizedBox width="20px" />
         <img
+          style={{
+            cursor: "pointer",
+          }}
           src={require("../public/logo_medium.png")}
           width="20"
           onClick={() => {
