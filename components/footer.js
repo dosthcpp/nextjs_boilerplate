@@ -1,5 +1,6 @@
 import { SizedBox } from "../utils/layout";
 import Select from "react-select";
+import Image from "next/image";
 
 const Footer = ({ language, setState }) => {
   return (
@@ -64,36 +65,42 @@ const Footer = ({ language, setState }) => {
           classNamePrefix="select"
         />
         <SizedBox width="30px" />
-        <img
+        <Image
           style={{
             cursor: "pointer",
           }}
-          src={require("../public/logo_facebook.png")}
+          src={"/../public/logo_facebook.png"}
           width="20"
+          height="20"
+          quality="100"
           onClick={() => {
             const win = window.open("", "_blank");
             win.focus();
           }}
         />
         <SizedBox width="20px" />
-        <img
+        <Image
           style={{
             cursor: "pointer",
           }}
-          src={require("../public/logo_youtube.png")}
+          src={"/../public/logo_youtube.png"}
           width="20"
+          height="20"
+          quality="100"
           onClick={() => {
             const win = window.open("", "_blank");
             win.focus();
           }}
         />
         <SizedBox width="20px" />
-        <img
+        <Image
           style={{
             cursor: "pointer",
           }}
-          src={require("../public/logo_medium.png")}
+          src={"/../public/logo_medium.png"}
           width="20"
+          height="20"
+          quality="100"
           onClick={() => {
             const win = window.open("", "_blank");
             win.focus();

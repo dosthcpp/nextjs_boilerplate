@@ -2,16 +2,22 @@
 // please run yarn watch && cs
 
 import Head from "next/head";
+import Image from "next/image";
 import wrapper from "../store/configureStore";
 import { useRouter } from "next/dist/client/router";
-import Header from "../components/header";
 import Footer from "../components/footer";
-import Resizer from "react-image-file-resizer";
+import styled from "styled-components";
 import { Column, SizedBox } from "../utils/layout";
 import user from "../public/static/image/user.png";
 import "../public/style.css";
 import { createRef, useCallback, useEffect, useRef, useState } from "react";
 import $ from "jquery";
+
+const ImageContainer = styled.div`
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+`;
 
 function Home() {
   const router = useRouter();
@@ -564,11 +570,15 @@ function Home() {
           <div>
             <SizedBox height="80px" />
             <div className="image_section">
-              <img
-                className="image_section__logo"
-                src={require("../public/logo.png")}
-                width="150"
-              />
+              <ImageContainer>
+                <Image
+                  className="image_section__logo"
+                  src="/../public/logo.png"
+                  width="162"
+                  height="26"
+                  quality="100"
+                />
+              </ImageContainer>
               <SizedBox height="120px" />
               <div className="image_section__text">
                 {language == "korean"
@@ -590,9 +600,9 @@ function Home() {
                   fontSize: "12px",
                 }}
               >
-                <img
+                <Image
                   className="image_section__logo-kised"
-                  src={require("../public/logo_kised.jpeg")}
+                  src={"/../public/logo_kised.jpeg"}
                   onClick={() => {
                     const win = window.open(
                       "https://www.kised.or.kr/",
@@ -602,7 +612,9 @@ function Home() {
                   }}
                   width="100"
                   height="50"
+                  quality="100"
                 />
+
                 <SizedBox height="15px" />
                 {language == "korean" ? (
                   <div></div>
@@ -628,19 +640,21 @@ function Home() {
                   fontSize: "12px",
                 }}
               >
-                <img
+                <Image
                   className="image_section__logo-kibo"
-                  src={require("../public/logo_kibo.jpg")}
+                  src={"/../public/logo_kibo.jpg"}
                   onClick={() => {
                     const win = window.open(
-                      "https://www.kibo.or.kr/main/index.do",
+                      "https://www.kised.or.kr/",
                       "_blank"
                     );
                     win.focus();
                   }}
                   width="100"
                   height="40"
+                  quality="100"
                 />
+
                 <SizedBox height="15px" />
                 {language == "korean" ? (
                   <div></div>
@@ -665,18 +679,19 @@ function Home() {
                   fontSize: "12px",
                 }}
               >
-                <img
+                <Image
                   className="image_section__logo-ecti"
-                  src={require("../public/logo_ecti.png")}
+                  src={"/../public/logo_ecti.png"}
                   onClick={() => {
                     const win = window.open(
-                      "http://www.xn--9d0b408a0kduva94b252cvya.com/",
+                      "https://www.kised.or.kr/",
                       "_blank"
                     );
                     win.focus();
                   }}
                   width="100"
                   height="50"
+                  quality="100"
                 />
                 <SizedBox height="15px" />
                 {language == "korean" ? (
@@ -703,10 +718,19 @@ function Home() {
                   fontSize: "12px",
                 }}
               >
-                <img
+                <Image
                   className="image_section__logo-user"
-                  src={require("../public/professor.jpeg")}
+                  src={"/../public/professor.jpeg"}
+                  onClick={() => {
+                    const win = window.open(
+                      "https://www.kised.or.kr/",
+                      "_blank"
+                    );
+                    win.focus();
+                  }}
                   width="70"
+                  height="70"
+                  quality="100"
                 />
                 <SizedBox height="15px" />
                 {language == "korean" ? (

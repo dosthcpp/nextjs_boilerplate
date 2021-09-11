@@ -779,11 +779,6 @@
 .select__input {
   color: transparent; }
 
-.image_section__logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%); }
-
 .image_section__text {
   position: absolute;
   left: 50%;
